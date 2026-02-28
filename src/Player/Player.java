@@ -65,7 +65,7 @@ public class Player {
 	 * main
 	 */
 	public static void main(String[] args) {
-		Player p1 = new Player("Alice");
+		Player p1 = new Player("Alicee");
 		Player p2 = new Player("Kara");
 		//turn 1
 		p1.setScore(1);
