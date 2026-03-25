@@ -21,7 +21,7 @@ public class Player {
 	}
 	
 	/**
-	 * Give generic nqme
+	 * Give generic name
 	 */
 	public Player() {
 		this("Player"+ (nbPlayer+1));
