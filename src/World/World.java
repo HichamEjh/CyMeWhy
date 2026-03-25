@@ -1,4 +1,5 @@
 package World;
+import Player.*; 
 
 public class World {
 	public char[][] map;
@@ -16,4 +17,19 @@ public class World {
 		}
 	}
 	
+	public void setPlayer(Player p, int x,int y) {
+		if (x<0 || y<0 || x>=map.length || y>=map[0].length){
+			throw new RuntimeException("Out of bounds");
+		}
+		else {
+			if(map[x][y]=='#') {
+				throw new RuntimeException("In a wall");
+			}
+			else {
+				map[x][y]='1';
+			}
+		}
+			
+		
+	}
 }
