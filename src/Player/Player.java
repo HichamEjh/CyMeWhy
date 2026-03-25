@@ -5,9 +5,10 @@ package Player;
  * @version w1.00.00
  */
 public class Player {
-	private String name;
+	private final String name;
 	private int score;
-
+	private static int nbPlayer = 0;
+	
 	/**
 	 * Define all parameter
 	 * 
@@ -16,7 +17,17 @@ public class Player {
 	public Player(String nm) {
 		name = nm;
 		score = 0;
+		nbPlayer++;
 	}
+	
+	/**
+	 * Give generic nqme
+	 */
+	public Player() {
+		this("Player"+ (nbPlayer+1));
+		
+	}
+	
 
 	/**
 	 * Return the player's name
@@ -36,6 +47,16 @@ public class Player {
 		return score;
 	}
 
+	/**
+	 * Return the number of player
+	 * 
+	 * @return number of player
+	 */
+	public static int getNumber() {
+		return nbPlayer;
+	}
+	
+	
 	/**
 	 * Set player's score
 	 * 
@@ -61,20 +82,19 @@ public class Player {
 		return this.getName() + ":" + this.getScore() + ((this.getScore() <= 1) ? "pt" : "pts"); //Put an 's' for the plural.
 	}
 
-	/*
-	 * main
+	/**
+	 * equals test
 	 */
-	public static void main(String[] args) {
-		Player p1 = new Player("Alice");
-		Player p2 = new Player("Kara");
-		//turn 1
-		p1.setScore(1);
-		p2.setScore(2);
-		System.out.println("==Turn 1\n" + p1.toString() + "\n" + p2.toString() + "\n");
-		//turn 2
-		p1.updateScore(1);
-		p2.updateScore(-1);
-		System.out.println("==Turn 2\n" + p1.toString() + "\n" + p2.toString() + "\n");
-		//
-	}
+	public boolean equals(Object obj) {
+        if (this == obj) return true;
+        
+        if (obj == null || !(obj instanceof Player)) return false;
+        
+        Player other = (Player) obj;
+        
+        return this.name.equalsIgnoreCase(other.name);
+    }
+	
+	
+
 }
