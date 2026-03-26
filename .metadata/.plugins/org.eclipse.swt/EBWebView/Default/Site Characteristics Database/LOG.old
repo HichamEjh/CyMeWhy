@@ -1,0 +1,5 @@
+2026/03/26-12:31:02.100 41f0 Log #3: 1 ops saved to Table #4 OK
+2026/03/26-12:31:02.103 41f0 Archiving H:\Cours\Java\CyMeWhy\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Site Characteristics Database/000003.log: OK
+2026/03/26-12:31:02.103 41f0 Table #4: 1 entries OK
+2026/03/26-12:31:02.104 41f0 Archiving H:\Cours\Java\CyMeWhy\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Site Characteristics Database/MANIFEST-000001: OK
+2026/03/26-12:31:02.109 41f0 **** Repaired leveldb H:\Cours\Java\CyMeWhy\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Site Characteristics Database; recovered 1 files; 130 bytes. Some data may have been lost. ****
