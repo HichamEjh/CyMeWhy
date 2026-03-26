@@ -1,18 +1,44 @@
 package World;
 import Player.*; 
 
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.IOException;
+import java.util.List;
 
 public class World {
 	public char[][] map;
 	public static enum Direction {W,S,D,A};
 	
 	
-	public World(char[][] lvl) {
-		map = lvl;
+	//public World(char[][] lvl) {
+	//	map = lvl;
+	//}
+	
+	public World(String map) {
+		try {
+			Path chemin = Path.of(map);
+			List <String> lignes = Files.readAllLines(chemin);
+			
+			int nbLignes = lignes.size();
+			int nbColonnes = lignes.get(0).length();
+			
+			this.map= new char[nbLignes][nbColonnes];
+			
+			for(int i=0; i<nbLignes; i++) {
+				this.map[i]=lignes.get(i).toCharArray();
+			}
+		} catch (IOException e) {
+	        System.out.println("⚠ Can't load level, wrong path");
+		}
 	}
 	
 	public void afficher() {
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
 		for(int i=0; i<map.length; i++) {
 			for(int j=0; j<map[i].length;  j++) {
 				System.out.print(map[i][j]);
@@ -36,7 +62,7 @@ public class World {
 			throw new RuntimeException("Out of bounds");
 		}
 		else {
-			map[p1.getX()][p1.getY()]='☺';
+			map[p1.getX()][p1.getY()]='0';
 		}
 	}
 	
