@@ -62,7 +62,7 @@ public class World {
 			throw new RuntimeException("Out of bounds");
 		}
 		else {
-			map[p1.getX()][p1.getY()]='1';
+			map[p1.getX()][p1.getY()]='0';
 		}
 	}
 	
