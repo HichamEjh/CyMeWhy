@@ -9,6 +9,13 @@ import java.util.Scanner;
 public class Main { 
 
 	public static void main(String[] args) {
+		
+		if (args.length == 0) {
+			System.out.println("⚠ Can't load level, wrong path");
+	        return; 
+	    }
+		String level = args[0];
+		
         Player p1 = new Player("Alice");
         Scanner sc = new Scanner(System.in);
         
@@ -23,7 +30,7 @@ public class Main {
         //        {'#', '#', '#', '#', '#','#','#','#','#','#','#'},       
         //    };
         
-        World lvl = new World("Level/lvl1");
+        World lvl = new World(level);
         p1.setXY(5, 6);
         lvl.setPlayer(p1);
         lvl.afficher();
