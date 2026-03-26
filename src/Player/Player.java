@@ -7,8 +7,8 @@ package Player;
 public class Player {
 	private final String name;
 	private int score;
-	public int x;
-	public int y;
+	private int x;
+	private int y;
 	private static int nbPlayer = 0;
 	
 	/**

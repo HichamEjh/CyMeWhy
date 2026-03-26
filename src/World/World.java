@@ -59,7 +59,6 @@ public class World {
 	        p.setXY(nx, ny);               
 	        this.setPlayer(nx, ny);        
 	    }
-	    afficher();
 	}
 
 
