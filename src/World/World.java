@@ -31,12 +31,12 @@ public class World {
 		
 	}
 	
-	public void setPlayer(int x,int y) {
-		if(!checkBoundary(x,y)) {
+	public void setPlayer(Player p1) {
+		if(!checkBoundary(p1.getX(),p1.getY())) {
 			throw new RuntimeException("Out of bounds");
 		}
 		else {
-			map[x][y]='1';
+			map[p1.getX()][p1.getY()]='☺';
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class World {
 	    if (this.checkBoundary(nx, ny)) {
 	        map[p.getX()][p.getY()] = ' '; 
 	        p.setXY(nx, ny);               
-	        this.setPlayer(nx, ny);        
+	        this.setPlayer(p);        
 	    }
 	}
 

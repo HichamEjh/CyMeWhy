@@ -26,7 +26,7 @@ public class Main {
         
         World lvl = new World(lvl1);
         p1.setXY(5, 6);
-        lvl.setPlayer(p1.getX(), p1.getY());
+        lvl.setPlayer(p1);
         lvl.afficher();
         
         while(true) {
@@ -34,7 +34,7 @@ public class Main {
         	System.out.println("│   [Z]                  │");
         	System.out.println("│[Q][S][D]  [M]: to quit │");
         	System.out.println("└────────────────────────┘");
-        	System.out.print("▶ ");
+        	System.out.print("▶ " + p1.getName() + " : ");
         	String input = sc.nextLine().toUpperCase();
             if(input.equals("M")) {
             	System.out.println("Good Bye");
