@@ -7,6 +7,8 @@ package Player;
 public class Player {
 	private final String name;
 	private int score;
+	public int x;
+	public int y;
 	private static int nbPlayer = 0;
 	
 	/**
@@ -17,6 +19,8 @@ public class Player {
 	public Player(String nm) {
 		name = nm;
 		score = 0;
+		x=5;
+		y=6;
 		nbPlayer++;
 	}
 	
@@ -28,6 +32,29 @@ public class Player {
 		
 	}
 	
+	public void setXY(int x,int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	
+	/**
+	 * Return the x
+	 * 
+	 * @return x
+	 */
+	public int getX() {
+		return x;
+	}
+	
+	/**
+	 * Return the x
+	 * 
+	 * @return x
+	 */
+	public int getY() {
+		return y;
+	}
 
 	/**
 	 * Return the player's name
