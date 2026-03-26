@@ -9,6 +9,9 @@ public class Player {
 	private int score;
 	private int x;
 	private int y;
+	private int spawnx;
+	private int spawny;
+	private int life;
 	private static int nbPlayer = 0;
 	
 	/**
@@ -21,6 +24,9 @@ public class Player {
 		score = 0;
 		x=5;
 		y=6;
+		spawnx=x;
+		spawny=y;
+		life=5;
 		nbPlayer++;
 	}
 	
@@ -37,6 +43,13 @@ public class Player {
 		this.y = y;
 	}
 	
+	public void updateLife(int nb){
+		life +=  nb;
+	}
+	
+	public int getLife() {
+		return life;
+	}
 	
 	/**
 	 * Return the x
@@ -54,6 +67,21 @@ public class Player {
 	 */
 	public int getY() {
 		return y;
+	}
+	
+
+	public int getSpawnX() {
+		return spawnx;
+	}
+	
+	public void respawn() {
+		x=spawnx;
+		y=spawny;
+	}
+	
+	
+	public int getSpawnY() {
+		return spawny;
 	}
 
 	/**
@@ -83,6 +111,10 @@ public class Player {
 		return nbPlayer;
 	}
 	
+	public void reset() {
+		score = 0;
+		life=5;
+	}
 	
 	/**
 	 * Set player's score
@@ -106,7 +138,18 @@ public class Player {
 	 * Display score of the player
 	 */
 	public String toString() {
-		return this.getName() + ":" + this.getScore() + ((this.getScore() <= 1) ? "pt" : "pts"); //Put an 's' for the plural.
+	    StringBuilder sb = new StringBuilder();
+	    sb.append(this.getName()+" ");
+	    for (int i = 0; i < life; i++) {
+	        sb.append("❤");
+	    }
+	    sb.append("|").append(this.getScore());
+	    if (this.getScore() <= 1) {
+	        sb.append("pt");
+	    } else {
+	        sb.append("pts");
+	    }
+	    return sb.toString();
 	}
 
 	/**

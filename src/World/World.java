@@ -9,11 +9,8 @@ import java.util.List;
 public class World {
 	public char[][] map;
 	public static enum Direction {W,S,D,A};
-	
-	
-	//public World(char[][] lvl) {
-	//	map = lvl;
-	//}
+	private int nbPiece=0;
+
 	
 	public World(String map) {
 		try {
@@ -38,13 +35,21 @@ public class World {
 		System.out.println();
 		System.out.println();
 		System.out.println();
-		
+		nbPiece=0;
 		for(int i=0; i<map.length; i++) {
 			for(int j=0; j<map[i].length;  j++) {
 				System.out.print(map[i][j]);
+				if(map[i][j]=='$') {
+					nbPiece++;
+				}
 			}
 			System.out.println();
 		}
+	}
+	
+	public int getPiece() {
+		return nbPiece;
+		
 	}
 	
 	public boolean checkBoundary(int x, int y) {
@@ -82,10 +87,26 @@ public class World {
 	    }
 	    if (this.checkBoundary(nx, ny)) {
 	        map[p.getX()][p.getY()] = ' '; 
-	        p.setXY(nx, ny);               
-	        this.setPlayer(p);        
+	        verifTiles(p,nx,ny);
 	    }
 	}
 
+	public void verifTiles(Player p, int nx,int ny) {
+		if(map[nx][ny]=='$') {
+			p.updateScore(10);
+			
+		}
+		else if(map[nx][ny]=='X') {
+			map[nx][ny]=' ';
+			p.updateLife(-2);
+			p.respawn();
+			setPlayer(p);
+			return;
+			
+		}
+		p.setXY(nx, ny);               
+	    setPlayer(p); 
+
+	}
 
 }
