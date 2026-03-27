@@ -5,7 +5,7 @@ package World;
 
 public class Cellule {
 	public enum Type {
-        MUR, PIEGE, PIECE, VIDE, PLAYER
+        MUR, PIEGE, PIECE, VIDE, PLAYER, PORTE
     }
 	
 	private final int x;
@@ -19,7 +19,7 @@ public class Cellule {
 		this.y = y;
 		this.type = type;
 		
-		if (type == Type.MUR) {
+		if (type == Type.MUR || type == Type.PORTE) {
             this.bloque = true;
         } 
 		else {
@@ -32,6 +32,7 @@ public class Cellule {
         case PIECE -> '$';
         case VIDE  -> ' ';
         case PLAYER  -> '1';
+        case PORTE -> 'P';
 		};
 	}
 	

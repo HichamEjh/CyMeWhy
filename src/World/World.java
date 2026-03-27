@@ -36,6 +36,7 @@ public class World {
 					Cellule.Type typeChoisi = switch(c) {
 		                case '#' -> Cellule.Type.MUR;
 		                case 'X' -> Cellule.Type.PIEGE;
+		                case 'P' -> Cellule.Type.PORTE;
 		                case '$' -> {nbPiece++; yield Cellule.Type.PIECE;}
 		                default  -> Cellule.Type.VIDE;
 		                };
@@ -75,15 +76,17 @@ public class World {
 	        System.out.println("⚠ Invalid Key");
 	        return; 
 	    }
-	    int nx = p.getX();
-	    int ny = p.getY();
+	    int nx = (p.getX()) % maxX;
+	    int ny = (p.getY()) % maxY;
 	    switch (d) {
 	        case W -> nx--;
 	        case S -> nx++;
 	        case D -> ny++;
 	        case A -> ny--;
 	    }
-	    if (map[nx][ny].getBloque()==false) {
+	    nx = (nx+maxX) % maxX;
+	    ny = (ny+maxY) % maxY;
+	    if (nx >= 0 && ny >= 0 && nx < maxX && ny < maxY && !map[nx][ny].getBloque()) {
 	        map[p.getX()][p.getY()] = new Cellule(p.getX(),p.getY(),Type.VIDE);
 	        verifTiles(p,nx,ny);
 	    }
