@@ -5,7 +5,7 @@ package World;
 
 public class Cellule {
 	public enum Type {
-        MUR, PIEGE, PIECE, VIDE
+        MUR, PIEGE, PIECE, VIDE, PLAYER
     }
 	
 	private final int x;
@@ -31,6 +31,7 @@ public class Cellule {
         case PIEGE -> 'X';
         case PIECE -> '$';
         case VIDE  -> ' ';
+        case PLAYER  -> '1';
 		};
 	}
 	

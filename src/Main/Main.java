@@ -34,7 +34,7 @@ public class Main {
     public static void main(String[] args) {
         
         if (args.length == 0) {
-            System.out.println("⚠ Can't load level, wrong path");
+            System.out.println	("⚠ Can't load level, wrong path");
             return; 
         }
         String level = args[0];
