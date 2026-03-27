@@ -4,6 +4,8 @@ import Player.*;
 import World.*;
 import World.World.Direction;
 import java.util.Scanner;
+import java.io.File;
+import java.util.Arrays;
 
 public class Main { 
 
@@ -12,8 +14,8 @@ public class Main {
         
         while (true) {
             System.out.println("┌────────────────────────┐");
-            System.out.println("│        GAME OVER !     │");
-            System.out.println("│        Try again ?     │");
+            System.out.println("│       GAME OVER !      │");
+            System.out.println("│       Try again ?      │");
             System.out.println("│    [Y]: Yes   [N]: No  │");
             System.out.println("└────────────────────────┘");
             System.out.print("▶ " + p + " : ");
@@ -34,67 +36,110 @@ public class Main {
     public static void main(String[] args) {
         
         if (args.length == 0) {
-            System.out.println	("⚠ Can't load level, wrong path");
+            System.out.println("⚠ Veuillez passer le chemin du dossier contenant les niveaux en argument.");
             return; 
         }
-        String level = args[0];
         
-        Player p1 = new Player("Alice");
-        Scanner sc = new Scanner(System.in);
-        boolean play = true;
+        File folder = new File(args[0]);
+        File[] listOfFiles;
         
-        World lvl = new World(level);
-        p1.setXY(5, 6);
-        lvl.setPlayer(p1);
-        lvl.afficher();
-        
-        while(play) {
-        	if(lvl.getPiece()==0) {
-        		System.out.println("--> Vous avez toutes les pieces");
-        	}
-            if (p1.getLife() <= 0) {
-                boolean wantsToRetry = askPlayAgain(sc, p1);
-                
-                if (wantsToRetry) {
-                    p1.reset();
-                    lvl = new World(level);
-                    lvl.setPlayer(p1);
-                    lvl.afficher();
-                    continue; 
-                } else {
-                    break;
-                }
+        if (folder.isDirectory()) {
+            listOfFiles = folder.listFiles();
+            if (listOfFiles != null) {
+                Arrays.sort(listOfFiles); 
             }
-
-            System.out.println("┌─────────────────────────┐");
-            System.out.println("│    [Z]                  │");
-            System.out.println("│ [Q][S][D]  [M]: to quit │");
-            System.out.println("└─────────────────────────┘");
-            System.out.print("▶ " + p1 + " : ");
-            
-            String input = sc.nextLine().toUpperCase();
-
-            if(input.equals("M")) {
-                System.out.println("Good Bye");
-                break; 
-            }
-            
-            Direction d = switch (input) {
-                case "W", "Z" -> Direction.W;
-                case "A", "Q" -> Direction.A;
-                case "S" -> Direction.S;
-                case "D" -> Direction.D;
-                default -> null;
-            };
-
-            if (d == null) {
-                System.out.println("⚠ Invalid Key"); 
-            } else {
-                lvl.movePlayer(p1, d);
-                lvl.afficher();
-            } 
+        } else {
+            listOfFiles = new File[] { folder };
+        }
+        
+        if (listOfFiles == null || listOfFiles.length == 0) {
+            System.out.println("⚠ Aucun fichier de niveau trouvé.");
+            return;
         }
 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("┌────────────────────────┐");
+        System.out.println("│ Enter your player name │");
+        System.out.println("└────────────────────────┘");
+        System.out.print("▶ ??? : ");
+        String playerName = sc.nextLine();
+        
+        Player p1 = new Player(playerName);
+        
+        // Parcours des niveaux
+        for (int i = 0; i < listOfFiles.length; i++) {
+            
+            if (listOfFiles[i].isFile()) {
+                String level = listOfFiles[i].getAbsolutePath();
+                World lvl = new World(level);
+                
+                p1.setXY(5, 6);
+                lvl.setPlayer(p1);
+                for (int k = 0; k < 50; k++) System.out.println();
+                lvl.afficher();
+                
+                boolean levelFinished = false;
+                
+                while (!levelFinished) {
+                	
+                    if (lvl.getPiece() == 0) {
+                    	System.out.println("┌────────────────────────┐");
+                        System.out.println("│   You have collected   │");
+                        System.out.println("│     all the pieces!    │");
+                        System.out.println("│        Thanks you      │");
+                        System.out.println("└────────────────────────┘");
+                        levelFinished = true;
+                        continue; 
+                    }
+                    
+                    if (p1.getLife() <= 0) {
+                        boolean wantsToRetry = askPlayAgain(sc, p1);
+                        
+                        if (wantsToRetry) {
+                            p1.reset(); 
+                            i = -1;     
+                            break;     
+                        } else {
+                        	System.out.println("Good Bye");
+                            sc.close();
+                            return; 
+                        }
+                    }
+                    System.out.println("┌─────────────────────────┐");
+                    System.out.println("│            [LEVEL : " + (i + 1) + "]  │ ");
+                    System.out.println("│    [Z]                  │");
+                    System.out.println("│ [Q][S][D]  [M]: to quit │");
+                    System.out.println("└─────────────────────────┘");
+                    System.out.print("▶ " + p1 + " : ");
+                    
+                    String input = sc.nextLine().toUpperCase();
+
+                    if (input.equals("M")) {
+                        System.out.println("Good Bye");
+                        sc.close();
+                        return; 
+                    }
+                    
+                    Direction d = switch (input) {
+                        case "W", "Z" -> Direction.W;
+                        case "A", "Q" -> Direction.A;
+                        case "S" -> Direction.S;
+                        case "D" -> Direction.D;
+                        default -> null;
+                    };
+
+                    if (d == null) {
+                        System.out.println("⚠ Invalid Key"); 
+                    } else {
+                        lvl.movePlayer(p1, d);
+                        for (int k = 0; k < 50; k++) System.out.println();
+                        
+                        lvl.afficher();
+                    } 
+                }
+            }
+        }
+        
         sc.close();
     }
 }
