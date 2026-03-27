@@ -49,6 +49,9 @@ public class Main {
         lvl.afficher();
         
         while(play) {
+        	if(lvl.getPiece()==0) {
+        		System.out.println("--> Vous avez toutes les pieces");
+        	}
             if (p1.getLife() <= 0) {
                 boolean wantsToRetry = askPlayAgain(sc, p1);
                 

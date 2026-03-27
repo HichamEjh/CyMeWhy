@@ -23,6 +23,7 @@ public class World {
 			this.map= new char[nbLignes][nbColonnes];
 			
 			for(int i=0; i<nbLignes; i++) {
+				
 				this.map[i]=lignes.get(i).toCharArray();
 			}
 		} catch (IOException e) {
