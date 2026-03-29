@@ -1,6 +1,6 @@
-package World;
+package world;
 import Player.*; 
-import World.Cellule.Type;
+import world.Cellule.Type;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -80,7 +80,7 @@ public class World {
 	    nx = (nx+maxX) % maxX;
 	    ny = (ny+maxY) % maxY;
 	    
-	    if (nx >= 0 && ny >= 0 && nx < maxX && ny < maxY && !map[nx][ny].isSolid()) {
+	    if (!map[nx][ny].isSolid()) {
 	        map[p.getX()][p.getY()] = new Cellule(p.getX(),p.getY(),Type.VIDE);
 	        verifTiles(p,nx,ny);
 	    }

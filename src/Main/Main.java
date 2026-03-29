@@ -1,8 +1,8 @@
-package Main; 
+package main; 
 
 import Player.*; 
-import World.*;
-import World.World.Direction;
+import world.*;
+import world.World.Direction;
 import java.util.Scanner;
 import java.io.File;
 import java.util.Arrays;
