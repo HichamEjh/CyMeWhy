@@ -14,14 +14,11 @@ public class World {
 	private int maxX;
 	private int maxY;
 	
-	//
 	public int getPiece() {
 		return nbPiece;
 	}
 
-	//Load image
 	public World(String grille) {
-		
 		try {
 			Path chemin = Path.of(grille);
 			List <String> lignes = Files.readAllLines(chemin);
@@ -40,16 +37,14 @@ public class World {
 		                case '$' -> {nbPiece++; yield Cellule.Type.PIECE;}
 		                default  -> Cellule.Type.VIDE;
 		                };
-	                map[i][j]=new Cellule(i,j,typeChoisi);
+	                map[i][j] = new Cellule(i,j,typeChoisi);
 				}
-					
 			}
 		} catch (IOException e) {
 	        System.out.println("⚠ Can't load level, wrong path");
 		}
 	}
 	
-	//Affichage
 	public void afficher() {
 		for(int i=0; i<maxX; i++) {
 			for(int j=0; j<maxY;  j++) {
@@ -59,10 +54,8 @@ public class World {
 		}
 	}
 	
-	
-	//Set Player
 	public void setPlayer(Player p) {
-		if(map[p.getX()][p.getY()].getType()== Type.MUR) {
+		if(map[p.getX()][p.getY()].isSolid()) {
 			throw new RuntimeException("Out of bounds");
 		}
 		else {
@@ -86,7 +79,8 @@ public class World {
 	    }
 	    nx = (nx+maxX) % maxX;
 	    ny = (ny+maxY) % maxY;
-	    if (nx >= 0 && ny >= 0 && nx < maxX && ny < maxY && !map[nx][ny].getBloque()) {
+	    
+	    if (nx >= 0 && ny >= 0 && nx < maxX && ny < maxY && !map[nx][ny].isSolid()) {
 	        map[p.getX()][p.getY()] = new Cellule(p.getX(),p.getY(),Type.VIDE);
 	        verifTiles(p,nx,ny);
 	    }
@@ -112,7 +106,5 @@ public class World {
 			    setPlayer(p); 
 			}
 		}
-		
 	}
-
 }
