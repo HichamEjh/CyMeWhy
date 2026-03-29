@@ -1,7 +1,6 @@
 package main; 
 
 import entity.*;
-import entity.Entity.Direction;
 import world.*;
 import java.util.Scanner;
 import java.io.File;
