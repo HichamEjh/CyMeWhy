@@ -1,7 +1,5 @@
 package entity;
 
-import world.Cellule;
-import world.Cellule.Type;
 import world.*;
 
 public abstract class Entity {
@@ -63,30 +61,27 @@ public abstract class Entity {
 	}
 	//##############################
 	public void moveEntity(World w){
-		
+		//
 		int nx=getX();
 		int ny=getY();
-		
+		//
 		Direction d = chooseMovement();
-		
+		//
 		switch(d) { 
 			case W -> nx--;
 			case S -> nx++;
 			case D -> ny++;
 			case A -> ny--;
 		} 
+		//
 		nx = (nx+w.maxX) % w.maxX;
 	    ny = (ny+w.maxY) % w.maxY;
-		if (!w.map[nx][ny].isSolid()) {
-	        w.map[getX()][getY()] = new Cellule(getX(),getY(),Type.VIDE);
-	        this.setX(nx);
-	        this.setY(ny);
-	        w.map[getX()][getY()] = new Cellule(getX(),getY(),Type.PLAYER);
-	        
-	    }
+	    checkCollision(w,nx,ny);
+		
 	}
 	
 	public abstract Direction chooseMovement();
+	public abstract void checkCollision(World w,int nx,int ny);
 }
 
 

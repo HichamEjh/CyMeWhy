@@ -2,6 +2,10 @@ package entity;
 
 import java.util.Scanner;
 
+import world.Cellule;
+import world.World;
+import world.Cellule.Type;
+
 public class Player extends Entity {
 	//##############################
 	private int life;
@@ -42,6 +46,7 @@ public class Player extends Entity {
 		this.life=5;
 		this.score=0;
 	}
+
 	@Override
 	public Direction chooseMovement() {
 		Scanner sc = new Scanner(System.in);
@@ -58,12 +63,22 @@ public class Player extends Entity {
 				System.out.println("⚠ Invalid Key"); 
 			}
 			else {
+				sc.close();
 				return d;
 				}
-			}while(true);
-			
+			}while(true);	
 	}
 
+	@Override
+	public void checkCollision(World w,int nx,int ny) {
+		if (!w.map[nx][ny].isSolid()) {
+	        w.map[getX()][getY()] = new Cellule(getX(),getY(),Type.VIDE);
+	        this.setX(nx);
+	        this.setY(ny);
+	        w.map[getX()][getY()] = new Cellule(getX(),getY(),Type.PLAYER);
+	        
+	    }
+	}
 }
 
 
