@@ -71,7 +71,10 @@ public class Main {
             
             if (listOfFiles[i].isFile()) {
                 String level = listOfFiles[i].getAbsolutePath();
-                World lvl = new World(level);
+                
+                // On passe le joueur p1 ici
+                World lvl = new World(level, p1);
+                
                 for (int k = 0; k < 50; k++) System.out.println();
                 lvl.afficher();
                 
@@ -117,15 +120,10 @@ public class Main {
                         return; 
                     }
                     else {
-                    	p1.moveEntity(input, lvl);
                     	for (int k = 0; k < 50; k++) System.out.println();
-                        
+                    	p1.moveEntity(input, lvl);
                         lvl.afficher();
                     }
-                    
-                    
-
-
                 }
             }
         }

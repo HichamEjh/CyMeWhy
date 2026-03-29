@@ -4,6 +4,8 @@ import java.nio.file.Path;
 import java.io.IOException;
 import java.util.List;
 
+import entity.Player;
+
 public class World {
 	public Cellule[][] map;
 	private int nbPiece=0;
@@ -14,7 +16,7 @@ public class World {
 		return nbPiece;
 	}
 
-	public World(String grille) {
+	public World(String grille, Player p) {
 		try {
 			Path chemin = Path.of(grille);
 			List <String> lignes = Files.readAllLines(chemin);
@@ -30,7 +32,12 @@ public class World {
 		                case '#' -> Cellule.Type.MUR;
 		                case 'X' -> Cellule.Type.PIEGE;
 		                case 'P' -> Cellule.Type.PORTE;
-		                case '1' -> Cellule.Type.PLAYER;
+		                case '1' -> {
+		                	p.setSpawnX(i);
+		                	p.setSpawnY(j);
+		                	p.resetEntity();
+		                	yield Cellule.Type.PLAYER;
+		                }
 		                case '$' -> {nbPiece++; yield Cellule.Type.PIECE;}
 		                default  -> Cellule.Type.VIDE;
 		                };
@@ -52,5 +59,3 @@ public class World {
 	}
 	
 }
-	
-	
