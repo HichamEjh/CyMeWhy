@@ -1,6 +1,7 @@
 package main; 
 
-import entity.*; 
+import entity.*;
+import entity.Entity.Direction;
 import world.*;
 import java.util.Scanner;
 import java.io.File;
@@ -8,7 +9,8 @@ import java.util.Arrays;
 
 public class Main { 
 
-    private static boolean askPlayAgain(Scanner sc, Player p) {
+
+	private static boolean askPlayAgain(Scanner sc, Player p) {
         for (int i = 0; i < 50; ++i) System.out.println();
         
         while (true) {
@@ -114,10 +116,14 @@ public class Main {
                         sc.close();
                         return; 
                     }
+                    else {
+                    	p1.moveEntity(input, lvl);
+                    	for (int k = 0; k < 50; k++) System.out.println();
+                        
+                        lvl.afficher();
+                    }
                     
-                    for (int k = 0; k < 50; k++) System.out.println();
                     
-                    lvl.afficher();
 
 
                 }

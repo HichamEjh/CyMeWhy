@@ -2,6 +2,7 @@ package entity;
 
 import world.Cellule;
 import world.Cellule.Type;
+import world.*;
 
 public class  Entity {
 	public static enum Direction {W,S,D,A};
@@ -61,25 +62,38 @@ public class  Entity {
 		this.y=this.spawnY;
 	}
 	//##############################
-	public void moveEntity(Direction d){
-		if (d == null) {
-	        System.out.println("⚠ Invalid Key");
-	        return; 
-	    }
+	public void moveEntity(String input, World w){
+		
 		int nx=getX();
 		int ny=getY();
+		
+		Direction d = switch (input) {
+        case "W", "Z" -> Direction.W;
+        case "A", "Q" -> Direction.A;
+        case "S" -> Direction.S;
+        case "D" -> Direction.D;
+        default -> null;
+		};
+		if (d == null) {
+			System.out.println("⚠ Invalid Key");
+			return; 
+		}
+		
 		switch(d) { 
 			case W -> nx--;
 			case S -> nx++;
 			case D -> ny++;
 			case A -> ny--;
-		}
-		//nx=nx; 
-		//ny=ny; 
-		if (nx >= 0 && ny >= 0 && nx < maxX && ny < maxY && !map[nx][ny].isSolid()) {
-	        map[p.getX()][p.getY()] = new Cellule(p.getX(),p.getY(),Type.VIDE);
+		} 
+		nx = (nx+w.maxX) % w.maxX;
+	    ny = (ny+w.maxY) % w.maxY;
+		if (!w.map[nx][ny].isSolid()) {
+	        w.map[getX()][getY()] = new Cellule(getX(),getY(),Type.VIDE);
+	        this.setX(nx);
+	        this.setY(ny);
+	        w.map[getX()][getY()] = new Cellule(getX(),getY(),Type.PLAYER);
+	        
 	    }
-		
 	}
 }
 

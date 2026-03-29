@@ -1,7 +1,4 @@
 package world;
-import entity.*; 
-import world.Cellule.Type;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
@@ -10,8 +7,8 @@ import java.util.List;
 public class World {
 	public Cellule[][] map;
 	private int nbPiece=0;
-	private int maxX;
-	private int maxY;
+	public int maxX;
+	public int maxY;
 	
 	public int getPiece() {
 		return nbPiece;
@@ -54,9 +51,6 @@ public class World {
 		}
 	}
 	
-	
-	
-
-
-
 }
+	
+	
