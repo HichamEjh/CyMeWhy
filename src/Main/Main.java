@@ -1,8 +1,7 @@
-package Main; 
+package main; 
 
-import Player.*; 
-import World.*;
-import World.World.Direction;
+import entity.*; 
+import world.*;
 import java.util.Scanner;
 import java.io.File;
 import java.util.Arrays;
@@ -66,15 +65,11 @@ public class Main {
         
         Player p1 = new Player(playerName);
         
-        // Parcours des niveaux
         for (int i = 0; i < listOfFiles.length; i++) {
             
             if (listOfFiles[i].isFile()) {
                 String level = listOfFiles[i].getAbsolutePath();
                 World lvl = new World(level);
-                
-                p1.setXY(5, 6);
-                lvl.setPlayer(p1);
                 for (int k = 0; k < 50; k++) System.out.println();
                 lvl.afficher();
                 
@@ -96,7 +91,7 @@ public class Main {
                         boolean wantsToRetry = askPlayAgain(sc, p1);
                         
                         if (wantsToRetry) {
-                            p1.reset(); 
+                            p1.resetPlayer(); 
                             i = -1;     
                             break;     
                         } else {
@@ -110,7 +105,7 @@ public class Main {
                     System.out.println("│    [Z]                  │");
                     System.out.println("│ [Q][S][D]  [M]: to quit │");
                     System.out.println("└─────────────────────────┘");
-                    System.out.print("▶ " + p1 + " : ");
+                    System.out.print( p1 + " : ");
                     
                     String input = sc.nextLine().toUpperCase();
 
@@ -120,22 +115,11 @@ public class Main {
                         return; 
                     }
                     
-                    Direction d = switch (input) {
-                        case "W", "Z" -> Direction.W;
-                        case "A", "Q" -> Direction.A;
-                        case "S" -> Direction.S;
-                        case "D" -> Direction.D;
-                        default -> null;
-                    };
+                    for (int k = 0; k < 50; k++) System.out.println();
+                    
+                    lvl.afficher();
 
-                    if (d == null) {
-                        System.out.println("⚠ Invalid Key"); 
-                    } else {
-                        lvl.movePlayer(p1, d);
-                        for (int k = 0; k < 50; k++) System.out.println();
-                        
-                        lvl.afficher();
-                    } 
+
                 }
             }
         }

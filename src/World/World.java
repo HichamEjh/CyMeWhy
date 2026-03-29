@@ -1,6 +1,6 @@
-package World;
-import Player.*; 
-import World.Cellule.Type;
+package world;
+import entity.*; 
+import world.Cellule.Type;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,7 +9,6 @@ import java.util.List;
 
 public class World {
 	public Cellule[][] map;
-	public static enum Direction {W,S,D,A};
 	private int nbPiece=0;
 	private int maxX;
 	private int maxY;
@@ -34,6 +33,7 @@ public class World {
 		                case '#' -> Cellule.Type.MUR;
 		                case 'X' -> Cellule.Type.PIEGE;
 		                case 'P' -> Cellule.Type.PORTE;
+		                case '1' -> Cellule.Type.PLAYER;
 		                case '$' -> {nbPiece++; yield Cellule.Type.PIECE;}
 		                default  -> Cellule.Type.VIDE;
 		                };
@@ -54,57 +54,9 @@ public class World {
 		}
 	}
 	
-	public void setPlayer(Player p) {
-		if(map[p.getX()][p.getY()].isSolid()) {
-			throw new RuntimeException("Out of bounds");
-		}
-		else {
-			this.map[p.getX()][p.getY()] = new Cellule(p.getX(),p.getY(),Type.PLAYER);
-		}
-	}
 	
-	public void movePlayer(Player p, Direction d) {
-	    if (p == null) throw new IllegalArgumentException("No player provided");
-	    if (d == null) {
-	        System.out.println("⚠ Invalid Key");
-	        return; 
-	    }
-	    int nx = (p.getX()) % maxX;
-	    int ny = (p.getY()) % maxY;
-	    switch (d) {
-	        case W -> nx--;
-	        case S -> nx++;
-	        case D -> ny++;
-	        case A -> ny--;
-	    }
-	    nx = (nx+maxX) % maxX;
-	    ny = (ny+maxY) % maxY;
-	    
-	    if (nx >= 0 && ny >= 0 && nx < maxX && ny < maxY && !map[nx][ny].isSolid()) {
-	        map[p.getX()][p.getY()] = new Cellule(p.getX(),p.getY(),Type.VIDE);
-	        verifTiles(p,nx,ny);
-	    }
-	}
+	
 
-	public void verifTiles(Player p, int nx,int ny) {
-		switch (map[nx][ny].getType()) {
-			case Type.PIECE -> {
-				p.updateScore(10);
-				nbPiece--;
-				p.setXY(nx, ny);               
-			    setPlayer(p); 
-			}
-			case Type.PIEGE -> {
-				map[nx][ny] = new Cellule(nx,ny,Type.VIDE);
-				p.updateLife(-2);
-				p.respawn();
-				setPlayer(p);
-				return;
-			}
-			default -> {
-				p.setXY(nx, ny);               
-			    setPlayer(p); 
-			}
-		}
-	}
+
+
 }
