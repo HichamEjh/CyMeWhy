@@ -4,7 +4,7 @@ import world.Cellule;
 import world.Cellule.Type;
 import world.*;
 
-public class  Entity {
+public abstract class Entity {
 	public static enum Direction {W,S,D,A};
 	//##############################
 	private final String name;
@@ -62,22 +62,12 @@ public class  Entity {
 		this.y=this.spawnY;
 	}
 	//##############################
-	public void moveEntity(String input, World w){
+	public void moveEntity(World w){
 		
 		int nx=getX();
 		int ny=getY();
 		
-		Direction d = switch (input) {
-        case "W", "Z" -> Direction.W;
-        case "A", "Q" -> Direction.A;
-        case "S" -> Direction.S;
-        case "D" -> Direction.D;
-        default -> null;
-		};
-		if (d == null) {
-			System.out.println("⚠ Invalid Key");
-			return; 
-		}
+		Direction d = chooseMovement();
 		
 		switch(d) { 
 			case W -> nx--;
@@ -95,6 +85,8 @@ public class  Entity {
 	        
 	    }
 	}
+	
+	public abstract Direction chooseMovement();
 }
 
 

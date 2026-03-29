@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.Scanner;
 
 public class Player extends Entity {
 	//##############################
@@ -40,6 +41,27 @@ public class Player extends Entity {
 	public void resetPlayer() {
 		this.life=5;
 		this.score=0;
+	}
+	@Override
+	public Direction chooseMovement() {
+		Scanner sc = new Scanner(System.in);
+		do {
+			String input = sc.nextLine().toUpperCase();
+			Direction d = switch (input) {
+				case "W", "Z" -> Direction.W;
+				case "A", "Q" -> Direction.A;
+				case "S" -> Direction.S;
+				case "D" -> Direction.D;
+				default -> null;
+			};
+			if (d == null) {
+				System.out.println("⚠ Invalid Key"); 
+			}
+			else {
+				return d;
+				}
+			}while(true);
+			
 	}
 
 }

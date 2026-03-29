@@ -65,7 +65,7 @@ public class Main {
         String playerName = sc.nextLine();
         
         Player p1 = new Player(playerName);
-        
+    	
         for (int i = 0; i < listOfFiles.length; i++) {
             
             if (listOfFiles[i].isFile()) {
@@ -107,22 +107,16 @@ public class Main {
                     System.out.println("┌─────────────────────────┐");
                     System.out.println("│            [LEVEL : " + (i + 1) + "]  │ ");
                     System.out.println("│    [Z]                  │");
-                    System.out.println("│ [Q][S][D]  [M]: to quit │");
+                    System.out.println("│ [Q][S][D]               │");
                     System.out.println("└─────────────────────────┘");
                     System.out.print( p1 + " : ");
                     
-                    String input = sc.nextLine().toUpperCase();
 
-                    if (input.equals("M")) {
-                        System.out.println("Good Bye");
-                        sc.close();
-                        return; 
-                    }
-                    else {
-                    	for (int k = 0; k < 50; k++) System.out.println();
-                    	p1.moveEntity(input, lvl);
-                        lvl.afficher();
-                    }
+
+                	p1.moveEntity(lvl);
+                    lvl.afficher();
+                    
+                    
                 }
             }
         }
