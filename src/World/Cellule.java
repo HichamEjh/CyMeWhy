@@ -7,6 +7,7 @@ public class Cellule {
         PIEGE('X', false), 
         VIDE(' ', false), 
         PLAYER('1', false), 
+        ZOMBIE('Z', false), 
         PORTE('P', true);
 
         private final char symbole;

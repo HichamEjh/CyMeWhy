@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.List;
 
 import entity.Entity;
+import entity.Zombie;
 
 public class World {
 	public Cellule[][] map;
 	private int nbPiece = 0;
 	public int maxX;
-	public int maxY;
-	
+	public int maxY;	
 	public int getPiece() {
 		return nbPiece;
 	}
@@ -23,10 +23,10 @@ public class World {
 		try {
 			Path chemin = Path.of(grille);
 			List<String> lignes = Files.readAllLines(chemin);
-			
 			maxX = lignes.size();
 			maxY = lignes.get(0).length();
 			this.map = new Cellule[maxX][maxY];
+			int idMob=1;
 			
 			for(int i = 0; i < maxX; i++) {
 				for(int j = 0; j < maxY; j++) {
@@ -47,6 +47,14 @@ public class World {
 							nbPiece++; 
 							isPiece = true;
 							yield Cellule.Type.VIDE; 
+						}
+						case 'Z' ->{
+							entity.add(new Zombie("Zombie"));
+							entity.get(idMob).setSpawnX(i);
+							entity.get(idMob).setSpawnY(j);
+							entity.get(idMob).resetEntity();
+							idMob++;
+							yield Cellule.Type.ZOMBIE; 
 						}
 						default  -> Cellule.Type.VIDE;
 					};
