@@ -85,8 +85,8 @@ public abstract class Entity {
 			case A -> ny--;
 		} 
 		//
-		nx = (nx+w.maxX) % w.maxX;
-	    ny = (ny+w.maxY) % w.maxY;
+		nx = (nx+w.getMaxX()) % w.getMaxX();
+	    ny = (ny+w.getMaxY()) % w.getMaxY();
 	    checkCollision(w,nx,ny);
 		
 	}

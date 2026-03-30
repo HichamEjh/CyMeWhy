@@ -121,6 +121,7 @@ public class Main {
                     for(Entity e : entity) {
                     	e.moveEntity(lvl);
                     }
+                    
                     lvl.afficher();
                     
                     

@@ -10,16 +10,29 @@ import entity.Zombie;
 public class World {
 	public Cellule[][] map;
 	private int nbPiece = 0;
-	public int maxX;
-	public int maxY;	
+	private int maxX;
+	private int maxY;	
+	private Entity player;
 	public int getPiece() {
 		return nbPiece;
 	}
 	public void minusPiece() {
 		this.nbPiece--;
 	}
+	public Entity getPlayer() {
+		return player;
+	}
+	public int getMaxX() {
+		return maxX;
+	}
+	public int getMaxY() {
+		return maxY;
+	}
+	
+	
+	
 	public World(String grille, List<Entity> entity ) {
-		Entity player = entity.get(0);
+		player = entity.get(0);
 		try {
 			Path chemin = Path.of(grille);
 			List<String> lignes = Files.readAllLines(chemin);
@@ -79,4 +92,5 @@ public class World {
 			System.out.println();
 		}
 	}
+	
 }
