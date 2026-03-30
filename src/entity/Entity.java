@@ -6,6 +6,7 @@ public abstract class Entity {
 	public static enum Direction {W,S,D,A};
 	//##############################
 	private final String name;
+	private int life;
 	private int x;
 	private int y;
 	private int spawnX;
@@ -15,11 +16,21 @@ public abstract class Entity {
 		this.name = name;
 	}
 	//##############################
+	public void updateLife(int n) {
+		this.life+=n;
+	}
+	public int getLife() {
+		return this.life;
+	}
 	public void setX(int x) {
 		this.x=x;
 	}
-	public void setY(int x) {
-		this.y=x;
+	public void setY(int y) {
+		this.y=y;
+	}
+	public void setXY(int x,int y) {
+		setX(x);
+		setY(y);
 	}
 	public void setSpawnX(int x) {
 		this.spawnX=x;

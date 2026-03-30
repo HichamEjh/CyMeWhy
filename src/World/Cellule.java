@@ -5,7 +5,6 @@ public class Cellule {
 	public enum Type {
         MUR('#', true), 
         PIEGE('X', false), 
-        PIECE('$', false), 
         VIDE(' ', false), 
         PLAYER('1', false), 
         PORTE('P', true);
@@ -25,19 +24,29 @@ public class Cellule {
 	private final int x;
 	private final int y;
 	private Type type;
+	private boolean hasPiece;
 	
 	public Cellule(int x, int y, Type type) {
 		this.x = x;
 		this.y = y;
 		this.type = type;
+		this.hasPiece=false;
 	}
 	
 	public String toString() {
-		return "x: " + this.x + " y: " + this.y + " Type: " + this.type;
+		return "x: " + this.x + " y: " + this.y + " Type: " + this.type + " Piece: " + this.hasPiece;
 	}
-	
+	public void setPiece(boolean hasPiece) {
+		this.hasPiece=hasPiece;
+	}
+	public boolean getPiece() {
+		return this.hasPiece;
+	}
 	public char getTexture() {
-		return type.getSymbole(); 
+		if (this.hasPiece) {
+			return '$';
+		}
+		return type.getSymbole();
 	}
 	
 	public boolean isSolid() {

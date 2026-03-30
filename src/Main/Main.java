@@ -5,11 +5,13 @@ import world.*;
 import java.util.Scanner;
 import java.io.File;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main { 
 
 
-	private static boolean askPlayAgain(Scanner sc, Player p) {
+	private static boolean askPlayAgain(Scanner sc, Entity p) {
         for (int i = 0; i < 50; ++i) System.out.println();
         
         while (true) {
@@ -63,16 +65,21 @@ public class Main {
         System.out.println("└────────────────────────┘");
         System.out.print("▶ ??? : ");
         String playerName = sc.nextLine();
-        
-        Player p1 = new Player(playerName);
+        //##############################################"""
+        //##############################################"""
+       //##############################################"""
+       //##############################################"""
+       //##############################################"""
+        List<Entity> entity = new ArrayList<>();
+        entity.add(new Player(playerName));
+        Entity player = entity.get(0);
     	
         for (int i = 0; i < listOfFiles.length; i++) {
             
             if (listOfFiles[i].isFile()) {
                 String level = listOfFiles[i].getAbsolutePath();
                 
-                // On passe le joueur p1 ici
-                World lvl = new World(level, p1);
+                World lvl = new World(level, entity);
                 
                 for (int k = 0; k < 50; k++) System.out.println();
                 lvl.afficher();
@@ -91,11 +98,11 @@ public class Main {
                         continue; 
                     }
                     
-                    if (p1.getLife() <= 0) {
-                        boolean wantsToRetry = askPlayAgain(sc, p1);
+                    if (player.getLife() <= 0) {
+                        boolean wantsToRetry = askPlayAgain(sc, player);
                         
                         if (wantsToRetry) {
-                            p1.resetPlayer(); 
+                            player.resetEntity(); 
                             i = -1;     
                             break;     
                         } else {
@@ -109,11 +116,12 @@ public class Main {
                     System.out.println("│    [Z]                  │");
                     System.out.println("│ [Q][S][D]               │");
                     System.out.println("└─────────────────────────┘");
-                    System.out.print( p1 + " : ");
+                    System.out.print( player + " : ");
                     
-
-
-                	p1.moveEntity(lvl);
+                    for(Entity e : entity) {
+                    	e.moveEntity(lvl);
+                    }
+                    
                     lvl.afficher();
                     
                     
