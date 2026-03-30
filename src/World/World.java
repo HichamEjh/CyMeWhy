@@ -49,7 +49,7 @@ public class World {
 							yield Cellule.Type.VIDE; 
 						}
 						case 'Z' ->{
-							entity.add(new Zombie("Zombie"));
+							entity.add(new Zombie("Zombie"+idMob));
 							entity.get(idMob).setSpawnX(i);
 							entity.get(idMob).setSpawnY(j);
 							entity.get(idMob).resetEntity();

@@ -119,9 +119,8 @@ public class Main {
                     System.out.print( player + " : ");
                     
                     for(Entity e : entity) {
-                    	
+                    	e.moveEntity(lvl);
                     }
-                    player.moveEntity(lvl);
                     lvl.afficher();
                     
                     

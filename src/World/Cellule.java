@@ -44,7 +44,7 @@ public class Cellule {
 		return this.hasPiece;
 	}
 	public char getTexture() {
-		if (this.hasPiece) {
+		if (this.hasPiece && this.type == Type.VIDE) {
 			return '$';
 		}
 		return type.getSymbole();
