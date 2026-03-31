@@ -89,8 +89,20 @@ public class World {
 			for(int j = 0; j < maxY; j++) {
 				System.out.print(map[i][j].getTexture());
 			}
-			System.out.println();
+			System.out.println(); 	
 		}
+	}
+	
+	public void checkPlayerLife(List<Entity> ennemy) {
+	    for(int i = 1 ; i < ennemy.size() ; i++) {
+	        if((this.player.getX() == ennemy.get(i).getX()) && (this.player.getY() == ennemy.get(i).getY())) {
+	            player.updateLife(-1);
+
+	            ennemy.get(i).resetEntity();
+	            
+	            System.out.println("Collision ! Retour au départ.");
+	        }
+	    }
 	}
 	
 }
